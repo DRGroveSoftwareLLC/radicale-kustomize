@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: radicale
+spec:
+  template:
+    spec:
+      serviceAccountName: radicale
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+        - name: radicale
+          image: radicale
+          env:
+            - name: RADICALE_CONFIG
+              value: /config/config
+          ports:
+            - name: http
+              containerPort: 5232
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          securityContext:
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: config
+              mountPath: /config/config
+              subPath: config
+            - name: user
+              mountPath: /config/user
+              subPath: users
+            - name: radicale
+              mountPath: /var/lib/radicale
+      volumes:
+        - name: config
+          configMap:
+            name: radicale
+            items:
+              - key: config
+                path: config
+        - name: user
+          secret:
+            optional: true
+            secretName: radicale-users
+            items:
+              - key: users
+                path: users
+  volumeClaimTemplates:
+    - metadata:
+        name: radicale
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 5Gi
