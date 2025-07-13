@@ -2,7 +2,7 @@
 
 [Source Repo][radicle-source]
 
-Build of [Radicale][radicale-website] as a reproducible Container using [[Stage<sup>X<sup>]][stagex-website]. Along with
+Build of [Radicale][radicale-website] as a reproducible Container using [[Stage<sup>X</sup>]][stagex-website]. Along with
 a base kustomization that can be used to deploy it.
 
 [radicle-website]:https://radicale.org/
