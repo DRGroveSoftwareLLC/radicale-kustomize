@@ -67,7 +67,5 @@ define run-container
 	docker run -it \
 		$(1) \
 		--entrypoint $(3) \
-		-v $$HOME/.aws:/home/user/.aws:rw \
-		-v $$HOME/.kube:/home/user/.kube:rw \
 		$(2)
 endef
