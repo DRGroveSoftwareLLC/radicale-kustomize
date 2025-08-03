@@ -16,14 +16,23 @@ export LC_ALL=C
 export BUILDKIT_MULTI_PLATFORM=1
 export DOCKER_BUILDKIT=1
 
+ifeq ($(NOCACHE), 1)
+NOCACHE_FLAG=--no-cache
+else
+NOCACHE_FLAG=
+endif
+export NOCACHE_FLAG
+
 all: \
 	image
+
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 $(IMAGE_DIR): $(BUILD_DIR)
 	mkdir -p $(IMAGE_DIR)
+
 
 .PHONY: image
 image: $(BUILD_DIR)/image/index.json
