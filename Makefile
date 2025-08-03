@@ -1,7 +1,7 @@
 PLATFORM ?= linux/amd64
 PROGRESS ?= auto
 REVISION ?= $(shell git rev-list -1 HEAD -- Containerfile)
-SOURCE_DATE_EPOCH := $(shell git log -1 --format=%ct $(REVISON))
+SOURCE_DATE_EPOCH := $(shell git log -1 --format=%ct $(REVISION))
 REGISTRY ?= drgrovellc
 NAME = radicale
 VERSION := latest
