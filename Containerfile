@@ -72,14 +72,21 @@ RUN --network=none <<-EOF
   install -vDm 644 DOCUMENTATION.md -t /rootfs/usr/share/doc/radicale/DOCUMENTATION.md
   install -vDm 644 README.md -t /rootfs/usr/share/doc/radicale/README.md
   install -vDm 644 COPYING.md /rootfs/usr/share/licenses/radicale/COPYING.md
+  find /rootfs | grep -E "(/__pycache__$|\.pyc$|\.pyo$)" | xargs rm -rf
 EOF
 
 FROM filesystem AS py-radicale
-LABEL org.opencontainers.image.revision=3.5.4
+LABEL org.opencontainers.image.version=3.5.4
 LABEL org.opencontainers.image.licenses=GPL-3.0-or-later
+LABEL org.opencontainers.image.vendor=Kozea
+LABEL org.opencontainers.image.authors="DR Grove Software LLC <container-images@drgrovellc.com>"
 COPY --from=build-radicale /rootfs /
 
 FROM filesystem AS radicale
+LABEL org.opencontainers.image.authors="Container Builds Team <container-images@drgrovellc.com>"
+LABEL org.opencontainers.image.url=https://github.com/DRGroveSoftwareLLC/radicale-kustomize
+LABEL org.opencontainers.image.vendor="DR Grove Software LLC"
+LABEL org.opencontainers.image.source=https://github.com/DRGroveSoftwareLLC/radicale-kustomize/Containerfile
 COPY --from=busybox . /
 COPY --from=gcc . /
 COPY --from=musl . /
