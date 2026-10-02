@@ -1,4 +1,4 @@
-FROM stagex/core-busybox@sha256:cac5d773db1c69b832d022c469ccf5f52daf223b91166e6866d42d6983a3b374 AS busybox
+FROM stagex/core-busybox@sha256:a094d1b5ad06943713e75849248d7f89546d15a3e74f42ec5b8f02375fd3706d AS busybox
 FROM stagex/core-bzip2@sha256:57e9b2b4fea6718bbe463a10e44f5cffbaad2fecada2f8f7733189c1a28be2a4 AS bzip2
 FROM stagex/core-filesystem@sha256:2aaaea601e1725a8292c4c28e723db5761d892b869556f9b05c0983ba11fe30e AS filesystem
 FROM stagex/core-gcc@sha256:125bd6306e7f37e57d377d5a189c0e499388aff42b22cc79acee6097357c617f AS gcc
